@@ -6,6 +6,7 @@ import NavBar from './views/NavBar/NavBar';
 import RegisterPage from './views/RegisterPage/RegisterPage';
 import Auth from '../hoc/auth';
 import ProfileEditPage from './views/ProfileEditPage/ProfileEditPage';
+import UploadPage from './views/UploadPage/UploadPage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route exact path='/login'component={Auth(LoginPage, false)} />
         <Route exact path='/register' component={Auth(RegisterPage, false)} />
         <Route exact path='/profile/edit' component={Auth(ProfileEditPage, true)} />
+        <Route exact path='/product/upload' component={Auth(UploadPage, true)} />
       </Switch>
       </div>
     </Router>

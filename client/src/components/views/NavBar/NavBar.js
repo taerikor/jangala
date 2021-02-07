@@ -56,11 +56,14 @@ function NavBar({history}) {
       <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
         <Menu.Item style={{float: 'left'}} key="1"><Link to='/' style={{display:'flex',alignItems:'center'}} >LOGO</Link></Menu.Item>
         {isAuth?
+            <>
             <Dropdown  overlay={menu} trigger={['click']}>
                 <a style={{float: 'right',marginLeft:'30px'}} className="ant-dropdown-link" onClick={e => e.preventDefault()} >
                     <img src={userImage} alt='profile'  style={{borderRadius:'50%',width:'2.5rem'}} />
                 </a>
             </Dropdown>
+             <Menu.Item style={{float: 'right'}} key="2"><Link to='/product/upload'>UPLOAD</Link></Menu.Item>
+            </>
                 :
                 <>
                 <Menu.Item key="4" style={{float: 'right'}}>
