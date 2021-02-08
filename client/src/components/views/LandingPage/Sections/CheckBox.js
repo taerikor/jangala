@@ -30,7 +30,7 @@ function CheckBox({list,handleFilters}) {
 
     return (
         <div>
-            <Collapse defaultActiveKey={['1']} >
+            <Collapse defaultActiveKey={['0']} >
                 <Panel header="Panel Header" key='1'>
                     {renderCheckboxLists()}
                 </Panel>

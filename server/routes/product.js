@@ -81,5 +81,20 @@ Router.post('/getProducts',(req,res)=>{
 
 })
 
+Router.get('/products_by_id',(req,res)=>{
+
+    let type = req.query.type;
+    let productId = req.query.id
+   
+    Product.find({_id:productId})
+    .populate('writer')
+    .exec((err, product)=>{
+        if(err) return res.status(400).send({ success: false, err })
+        return res.status(200).send({success:true , product})
+    })
+
+})
+
+
 
 module.exports = Router;
