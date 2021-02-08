@@ -9,25 +9,25 @@ const { Title } = Typography
 
 const ContinentOptions = [
     {
-        value:0 , label:'Africa'
+        value:1 , label:'Africa'
     },
     {
-        value:1 , label:'Europe'
+        value:2 , label:'Europe'
     },
     {
-        value:2 , label:'Asia'
+        value:3 , label:'Asia'
     },
     {
-        value:3 , label:'North America'
+        value:4 , label:'North America'
     },
     {
-        value:4 , label:'South America'
+        value:5 , label:'South America'
     },
     {
-        value:5 , label:'Australia'
+        value:6 , label:'Australia'
     },
     {
-        value:6 , label:'Antarctica'
+        value:7 , label:'Antarctica'
     },
 ]
 
@@ -68,7 +68,7 @@ function UploadPage({history}) {
             price,
             images,
             writer:localStorage.getItem('userId'),
-            continent
+            continents:continent
         }
 
         axios.post('/api/product',ProductVariable)

@@ -58,9 +58,9 @@ function NavBar({history}) {
         {isAuth?
             <>
             <Dropdown  overlay={menu} trigger={['click']}>
-                <a style={{float: 'right',marginLeft:'30px'}} className="ant-dropdown-link" onClick={e => e.preventDefault()} >
+                <div style={{float: 'right',marginLeft:'30px'}} className="ant-dropdown-link" onClick={e => e.preventDefault()} >
                     <img src={userImage} alt='profile'  style={{borderRadius:'50%',width:'2.5rem'}} />
-                </a>
+                </div>
             </Dropdown>
              <Menu.Item style={{float: 'right'}} key="2"><Link to='/product/upload'>UPLOAD</Link></Menu.Item>
             </>
