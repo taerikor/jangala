@@ -13,12 +13,9 @@ function ProductDetailPage({match}) {
     useEffect(()=>{
         axios.get(`/api/product/products_by_id?id=${productId}&type=single`)
         .then(res => {
-            if(res.data.success){
-                setProduct(res.data.product[0])
-            }else{
-                alert('failed to get product')
-            }
+                setProduct(res.data[0])
         })
+        .catch(err => alert(err)) 
     },[])
 
     return (

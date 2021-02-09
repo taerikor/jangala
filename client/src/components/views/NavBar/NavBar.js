@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import { Layout, Menu,Dropdown } from 'antd';
+import { Layout, Menu,Dropdown,Badge } from 'antd';
+import { ShoppingCartOutlined , AntCloudOutlined } from '@ant-design/icons'
+
 
 const { Header } = Layout;
 
@@ -54,7 +56,7 @@ function NavBar({history}) {
             <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
       <div className="logo" />
       <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
-        <Menu.Item style={{float: 'left'}} key="1"><Link to='/' style={{display:'flex',alignItems:'center'}} >LOGO</Link></Menu.Item>
+        <Menu.Item style={{float: 'left'}} key="logo"><Link to='/' ><AntCloudOutlined style={{fontSize:'2rem',marginRight:-1}} />Travel</Link></Menu.Item>
         {isAuth?
             <>
             <Dropdown  overlay={menu} trigger={['click']}>
@@ -62,14 +64,21 @@ function NavBar({history}) {
                     <img src={userImage} alt='profile'  style={{borderRadius:'50%',width:'2.5rem'}} />
                 </div>
             </Dropdown>
-             <Menu.Item style={{float: 'right'}} key="2"><Link to='/product/upload'>UPLOAD</Link></Menu.Item>
+             <Menu.Item style={{float: 'right'}} key="cart">
+                 <Badge count={5}>
+                 <Link to='/user/cart'>
+                 <ShoppingCartOutlined style={{fontSize:'25px',marginRight:5}}/>
+                 </Link>
+                 </Badge>
+             </Menu.Item>
+             <Menu.Item style={{float: 'right'}} key="upload"><Link to='/product/upload'>UPLOAD</Link></Menu.Item>
             </>
                 :
                 <>
-                <Menu.Item key="4" style={{float: 'right'}}>
+                <Menu.Item key="signIn" style={{float: 'right'}}>
                     <Link to='/login' >SIGN IN</Link>
                 </Menu.Item>
-                <Menu.Item key="5" style={{float: 'right'}}>
+                <Menu.Item key="sighUp" style={{float: 'right'}}>
                     <Link to='/register' >SIGN UP</Link>
                 </Menu.Item>
                 </>

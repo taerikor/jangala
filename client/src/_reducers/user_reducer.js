@@ -1,4 +1,4 @@
-import { ADD_TO_CART, AUTH_USER, LOGIN_USER, REGISTER_USER } from '../_actions/types';
+import { ADD_TO_CART, AUTH_USER, GET_CART_ITEMS, LOGIN_USER, REGISTER_USER, REMOVE_FROM_CART } from '../_actions/types';
 
 function userReducer(state = {}, action) {
     switch (action.type) {
@@ -15,6 +15,13 @@ function userReducer(state = {}, action) {
                         cart:action.payload
                         }
                     }
+        case GET_CART_ITEMS:
+            return { ...state, cartDetail: action.payload }
+        case REMOVE_FROM_CART:
+            return { ...state, cartDetail: action.payload.productInfo,
+            userData: {
+                ...state.userData, cart: action.payload.cart
+            } }
         default:
             return state;
     }
