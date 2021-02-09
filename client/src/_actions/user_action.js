@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ADD_TO_CART, AUTH_USER, GET_CART_ITEMS, LOGIN_USER, REGISTER_USER, REMOVE_FROM_CART } from './types'
+import { ADD_TO_CART, AUTH_USER, GET_CART_ITEMS, LOGIN_USER, REGISTER_USER, REMOVE_FROM_CART, ON_SUCCESS_BUY } from './types'
 
 export function loginUser(dataToSubmit){
 
@@ -79,6 +79,15 @@ export function removeToCart(productId){
     })
     return {
         type: REMOVE_FROM_CART,
+        payload: request,
+    }
+}
+export function onSuccessBuy(data){
+
+    const request = axios.post('/api/users/onSuccessBuy',data)
+    .then(res => res.data)
+    return {
+        type: ON_SUCCESS_BUY,
         payload: request,
     }
 }

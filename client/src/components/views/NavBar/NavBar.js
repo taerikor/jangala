@@ -13,18 +13,18 @@ const { Header } = Layout;
 function NavBar({history}) {
     const [isAuth,setIsAuth] = useState(false)
     const [userImage,setUserImage] = useState('')
-    const state = useSelector(res => res?.user);
+    const user = useSelector(state=> state.user);
     
 
     useEffect(() => {
-        if(state.userData?.isAuth){
+        if(user.userData?.isAuth){
             setIsAuth(true)
-            setUserImage(state.userData.image)
+            setUserImage(user.userData.image)
         }else{
             setIsAuth(false)
         }
        
-    },[state])
+    },[user])
 
     const onClick = () => {
         axios.get('/api/users/logout')
@@ -65,13 +65,14 @@ function NavBar({history}) {
                 </div>
             </Dropdown>
              <Menu.Item style={{float: 'right'}} key="cart">
-                 <Badge count={5}>
+                 <Badge count={user.userData.cart.length}>
                  <Link to='/user/cart'>
                  <ShoppingCartOutlined style={{fontSize:'25px',marginRight:5}}/>
                  </Link>
                  </Badge>
              </Menu.Item>
              <Menu.Item style={{float: 'right'}} key="upload"><Link to='/product/upload'>UPLOAD</Link></Menu.Item>
+             <Menu.Item style={{float: 'right'}} key="history"><Link to='/history'>HISTORY</Link></Menu.Item>
             </>
                 :
                 <>

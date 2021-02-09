@@ -8,8 +8,6 @@ To use this application,
 2. put mongoDB info into dev.js file
 3. Type " npm install " inside the root directory ( Download Server Dependencies )
 4. Type " npm install " inside the client directory ( Download Front-end Dependencies )
-5. Make folder 'uploads' inside the root directory
-6. Make folder 'userImg' inside the uploads directory
 
 You can watch the tutorial for this app.
 
