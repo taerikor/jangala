@@ -1,16 +1,23 @@
 # Shop app
 
-use and learn MERN stack
+Online Shopping mall app with React,Redux,Express,MySQL
 
-To use this application,
+## Feature
 
-1. make dev.js file inside config folder
-2. put mongoDB info into dev.js file
-3. Type " npm install " inside the root directory ( Download Server Dependencies )
-4. Type " npm install " inside the client directory ( Download Front-end Dependencies )
+- Create account with Email, Password
+- Upload photos, explanations, and prices of items to be sold
+- Payment history
+- Search for products and category filters
+- Add a shopping cart and Paypal
+
+## To use this app
+
+1. make `dev.js` inside `server/config`
+2. put **mongoDB** info into `dev.js`
+3. Type " npm install " inside the `root` , `/front` directory ( Download Server & Front-end Dependencies )
+
+## Course
 
 You can watch the tutorial for this app.
-
 https://www.youtube.com/channel/UCFyXA9x8lpL3EYWeYhj4C4Q?view_as=subscriber
-
 by John Ahn (https://github.com/jaewonhimnae)
