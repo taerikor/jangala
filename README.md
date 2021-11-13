@@ -1,6 +1,6 @@
 # Shop app
 
-Online Shopping mall app with React,Redux,Express,MySQL
+Online Shopping app with React,Redux,Express,MySQL
 
 ## Feature
 
@@ -13,7 +13,7 @@ Online Shopping mall app with React,Redux,Express,MySQL
 ## To use this app
 
 1. make `dev.js` inside `server/config`
-2. put **mongoDB** info into `dev.js`
+2. put **mongoDB** URL into `dev.js`
 3. Type " npm install " inside the `root` , `/front` directory ( Download Server & Front-end Dependencies )
 
 ## Course
