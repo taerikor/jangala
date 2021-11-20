@@ -1,6 +1,6 @@
-# Shop app
+# Jangala
 
-Online Shopping app with React,Redux,Express,MySQL
+eCommerce platform with React,Redux,Express,MongoDB
 
 ## Feature
 
