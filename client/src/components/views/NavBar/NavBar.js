@@ -1,93 +1,87 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-import { Link } from 'react-router-dom'
-import { Layout, Menu,Dropdown,Badge } from 'antd';
-import { ShoppingCartOutlined , AntCloudOutlined } from '@ant-design/icons'
-
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Layout, Menu, Dropdown } from "antd";
 
 const { Header } = Layout;
 
+function NavBar({ history }) {
+  const [isAuth, setIsAuth] = useState(false);
+  const user = useSelector((state) => state.user);
 
-function NavBar({history}) {
-    const [isAuth,setIsAuth] = useState(false)
-    const [userImage,setUserImage] = useState('')
-    const user = useSelector(state=> state.user);
-    
-
-    useEffect(() => {
-        if(user.userData?.isAuth){
-            setIsAuth(true)
-            setUserImage(user.userData.image)
-        }else{
-            setIsAuth(false)
-        }
-       
-    },[user])
-
-    const onClick = () => {
-        axios.get('/api/users/logout')
-             .then(res => {
-                 if(res.data.success) {
-                    history.push('/login')
-                 }else {
-                     alert('failed logout')
-                 }
-             })
+  useEffect(() => {
+    if (user.userData?.isAuth) {
+      setIsAuth(true);
+    } else {
+      setIsAuth(false);
     }
+  }, [user]);
 
-    const menu = (
-        <Menu >
-        <Menu.Item key="0"  >
-            <a href='/profile/edit' >Edit</a>
-        </Menu.Item>
-        <hr />
-        <Menu.Item key="1"  onClick={onClick}>
-            <span>Logout</span>
-        </Menu.Item>
-        </Menu>
-    )
+  const onClick = () => {
+    axios.get("/api/users/logout").then((res) => {
+      if (res.data.success) {
+        history.push("/login");
+      } else {
+        alert("failed logout");
+      }
+    });
+  };
 
-    
+  const menu = (
+    <Menu>
+      <Menu.Item key="0">
+        <a href="/profile">Profile</a>
+      </Menu.Item>
+      <Menu.Item key="1" onClick={onClick}>
+        <span>Logout</span>
+      </Menu.Item>
+    </Menu>
+  );
 
-    return (
-        <Layout>
-            <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
-      <div className="logo" />
-      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
-        <Menu.Item style={{float: 'left'}} key="logo"><Link to='/' ><AntCloudOutlined style={{fontSize:'2rem',marginRight:-1}} />Travel</Link></Menu.Item>
-        {isAuth?
+  return (
+    <Layout>
+      <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
+        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
+          <Menu.Item style={{ float: "left" }} key="logo">
+            <Link to="/">Jangala</Link>
+          </Menu.Item>
+          {isAuth ? (
             <>
-            <Dropdown  overlay={menu} trigger={['click']}>
-                <div style={{float: 'right',marginLeft:'30px'}} className="ant-dropdown-link" onClick={e => e.preventDefault()} >
-                    <img src={userImage} alt='profile'  style={{borderRadius:'50%',width:'2.5rem'}} />
-                </div>
-            </Dropdown>
-             <Menu.Item style={{float: 'right'}} key="cart">
-                 <Badge count={user.userData.cart.length}>
-                 <Link to='/user/cart'>
-                 <ShoppingCartOutlined style={{fontSize:'25px',marginRight:5}}/>
-                 </Link>
-                 </Badge>
-             </Menu.Item>
-             <Menu.Item style={{float: 'right'}} key="upload"><Link to='/product/upload'>UPLOAD</Link></Menu.Item>
-             <Menu.Item style={{float: 'right'}} key="history"><Link to='/history'>HISTORY</Link></Menu.Item>
+              <Menu.Item style={{ float: "right" }} key="profile">
+                <Dropdown overlay={menu} trigger={["click"]}>
+                  <div
+                    className="ant-dropdown-link"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    <span>{user.userData.name}</span>
+                  </div>
+                </Dropdown>
+              </Menu.Item>
+              <Menu.Item style={{ float: "right" }} key="cart">
+                <Link to="/user/cart">
+                  {`Cart (${user.userData.cart.length})`}
+                </Link>
+              </Menu.Item>
+              <Menu.Item style={{ float: "right" }} key="upload">
+                <Link to="/product/upload">UPLOAD</Link>
+              </Menu.Item>
             </>
-                :
-                <>
-                <Menu.Item key="signIn" style={{float: 'right'}}>
-                    <Link to='/login' >SIGN IN</Link>
-                </Menu.Item>
-                <Menu.Item key="sighUp" style={{float: 'right'}}>
-                    <Link to='/register' >SIGN UP</Link>
-                </Menu.Item>
-                </>
-                }
-      </Menu>
-    </Header>
-        </Layout>
-    )
+          ) : (
+            <>
+              <Menu.Item key="signIn" style={{ float: "right" }}>
+                <Link to="/login">SIGN IN</Link>
+              </Menu.Item>
+              <Menu.Item key="sighUp" style={{ float: "right" }}>
+                <Link to="/register">SIGN UP</Link>
+              </Menu.Item>
+            </>
+          )}
+        </Menu>
+      </Header>
+    </Layout>
+  );
 }
 
-export default withRouter(NavBar)
+export default withRouter(NavBar);
