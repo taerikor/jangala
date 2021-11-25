@@ -49,6 +49,7 @@ function LandingPage() {
             cover={
               <img
                 src={`http://localhost:5000/${product.images[0]}`}
+                style={{ width: "100%", height: "250px" }}
                 alt="product"
               />
             }
@@ -117,10 +118,10 @@ function LandingPage() {
     setSearchTerm(newSearchTerm);
     getProducts(body);
   };
-  console.log(products[3]?.images);
+  const mainProducts = products?.filter((elem, i) => i < 3);
   return (
-    <div style={{ width: "80%", margin: "2rem auto" }}>
-      <Carousel products={products[4]} />
+    <div style={{ width: "80%", margin: "1rem auto" }}>
+      <Carousel products={mainProducts} />
       <Row gutter={[16, 16]}>
         <Col lg={12} xs={24}>
           {/* CheckBox */}
@@ -148,7 +149,7 @@ function LandingPage() {
         <SearchFeature reFreshFunction={updateSearchTerm} />
       </div>
       <br />
-      <Row gutter={(16, 16)}>{renderCards}</Row>
+      <Row gutter={(12, 12)}>{renderCards}</Row>
       <br />
       {postSize >= Skip && (
         <div style={{ display: "flex", justifyContent: "center" }}>

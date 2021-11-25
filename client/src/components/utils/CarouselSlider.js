@@ -31,13 +31,16 @@ function CarouselSlider({ products }) {
     console.log(products);
     return (
       <Carousel showStatus={false} showThumbs={false}>
-        {products.images.map((image, index) => (
+        {products.map((product, index) => (
           <Wrapper key={index}>
-            <img src={`http://localhost:5000/${image}`} alt="main product" />
+            <img
+              src={`http://localhost:5000/${product.images[0]}`}
+              alt="main product"
+            />
             <ContentWrapper>
-              <Title>{products.title}</Title>
-              <p>{`${products.description}`}</p>
-              <p style={{ fontSize: "1rem" }}>{`${products.price} $`}</p>
+              <Title>{product.title}</Title>
+              <p>{`${product.description}`}</p>
+              <p style={{ fontSize: "1rem" }}>{`${product.price} $`}</p>
             </ContentWrapper>
           </Wrapper>
         ))}
