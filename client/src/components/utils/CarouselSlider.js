@@ -4,7 +4,7 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function CarouselSlider({ products }) {
-  const Wrapper = styled.div`
+  const Wrapper = styled.a`
     background-color: #212121;
     height: 400px;
     display: flex;
@@ -32,7 +32,7 @@ function CarouselSlider({ products }) {
     return (
       <Carousel showStatus={false} showThumbs={false}>
         {products.map((product, index) => (
-          <Wrapper key={index}>
+          <Wrapper href={`/product/${product._id}`} key={index}>
             <img
               src={`http://localhost:5000/${product.images[0]}`}
               alt="main product"

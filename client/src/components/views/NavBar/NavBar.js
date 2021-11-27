@@ -61,11 +61,11 @@ function NavBar({ history }) {
               </Menu.Item>
               <Menu.Item style={{ float: "right" }} key="cart">
                 <Link to="/user/cart">
-                  {`Cart (${user.userData.cart.length})`}
+                  {`CART (${user.userData.cart.length})`}
                 </Link>
               </Menu.Item>
               <Menu.Item style={{ float: "right" }} key="upload">
-                <Link to="/product/upload">UPLOAD</Link>
+                <Link to="/product/upload">SELL</Link>
               </Menu.Item>
             </>
           ) : (
