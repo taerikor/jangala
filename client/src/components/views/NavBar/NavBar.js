@@ -39,7 +39,6 @@ function NavBar({ history }) {
       </Menu.Item>
     </Menu>
   );
-
   return (
     <Layout>
       <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>

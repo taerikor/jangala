@@ -118,10 +118,9 @@ function LandingPage() {
     setSearchTerm(newSearchTerm);
     getProducts(body);
   };
-  const mainProducts = products?.filter((elem, i) => i < 3);
   return (
     <div style={{ width: "80%", margin: "1rem auto" }}>
-      <Carousel products={mainProducts} />
+      <Carousel />
       <Row gutter={[16, 16]}>
         <Col lg={12} xs={24}>
           {/* CheckBox */}
