@@ -28,6 +28,13 @@ app.use("/api/product", require("./routes/product"));
 
 app.use("/uploads", express.static("uploads"));
 
+//nodemon Port Crush : https://jeonghwan-kim.github.io/dev/2020/04/30/nodemon-EADDRINUSE.html
+process.once("SIGUSR2", function () {
+  gracefulShutdown(function () {
+    process.kill(process.pid, "SIGUSR2");
+  });
+});
+
 const port = 5000;
 
 app.listen(port, () => {
