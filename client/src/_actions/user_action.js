@@ -7,6 +7,7 @@ import {
   REGISTER_USER,
   REMOVE_FROM_CART,
   ON_SUCCESS_BUY,
+  ADD_REVIEW,
 } from "./types";
 
 export function loginUser(dataToSubmit) {
@@ -91,5 +92,14 @@ export function onSuccessBuy(data) {
   return {
     type: ON_SUCCESS_BUY,
     payload: request,
+  };
+}
+export function addReviewAction(data) {
+  // const request = axios
+  //   .post("/api/product/review", data)
+  //   .then((res) => res.data);
+  return {
+    type: ADD_REVIEW,
+    payload: data,
   };
 }

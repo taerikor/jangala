@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import { Row, Col } from "antd";
 import ProductImage from "./Sections/ProductImage";
 import ProductInfo from "./Sections/ProductInfo";
+import ReviewForm from "./Sections/ReviewForm";
 
 function ProductDetailPage({ match }) {
   const [product, setProduct] = useState([]);
@@ -39,6 +40,7 @@ function ProductDetailPage({ match }) {
           <ProductInfo detail={product} />
         </Col>
       </Row>
+      <ReviewForm />
     </div>
   );
 }
