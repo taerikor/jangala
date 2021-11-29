@@ -118,6 +118,7 @@ function LandingPage() {
     setSearchTerm(newSearchTerm);
     getProducts(body);
   };
+  console.log(products);
   return (
     <div style={{ width: "80%", margin: "1rem auto" }}>
       <Carousel />

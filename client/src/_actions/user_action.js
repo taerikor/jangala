@@ -94,12 +94,3 @@ export function onSuccessBuy(data) {
     payload: request,
   };
 }
-export function addReviewAction(data) {
-  // const request = axios
-  //   .post("/api/product/review", data)
-  //   .then((res) => res.data);
-  return {
-    type: ADD_REVIEW,
-    payload: data,
-  };
-}
