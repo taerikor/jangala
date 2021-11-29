@@ -38,7 +38,6 @@ const ReviewForm = ({ productId, refreshRender }) => {
 
   return (
     <Form onFinish={onSubmit}>
-      <h2>Reviews</h2>
       <Rate allowHalf defaultValue={2.5} onChange={onRateChange} value={rate} />
       <TextArea value={text} onChange={onTextChange} />
       <Button onClick={onSubmit} type="submit">

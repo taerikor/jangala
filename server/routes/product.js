@@ -105,7 +105,7 @@ Router.get("/products_by_id", (req, res) => {
 });
 Router.get("/top_products", (req, res) => {
   Product.find({})
-    .sort({ views: -1 })
+    .sort({ sold: -1 })
     .limit(3)
     .populate("writer")
     .exec((err, product) => {

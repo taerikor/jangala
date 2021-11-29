@@ -46,6 +46,7 @@ function ProductDetailPage({ match }) {
           <ProductInfo detail={product} />
         </Col>
       </Row>
+      <h2>Reviews</h2>
       {user.userData?.isAuth && (
         <ReviewForm refreshRender={refreshRender} productId={productId} />
       )}
