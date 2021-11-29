@@ -8,7 +8,13 @@ import {
   REMOVE_FROM_CART,
 } from "../_actions/types";
 
-function userReducer(state = {}, action) {
+const initialState = {
+  userData: {
+    isAuth: false,
+  },
+};
+
+function userReducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN_USER:
       return { ...state, loginSuccess: action.payload };

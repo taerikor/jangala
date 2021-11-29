@@ -105,13 +105,49 @@ Router.get("/products_by_id", (req, res) => {
 });
 Router.get("/top_products", (req, res) => {
   Product.find({})
-    .sort({ views: -1 })
+    .sort({ sold: -1 })
     .limit(3)
     .populate("writer")
     .exec((err, product) => {
       if (err) return res.status(400).send({ success: false, err });
       return res.status(200).send(product);
     });
+});
+
+Router.post("/add_review", (req, res) => {
+  const { rate, text, userId, productId, name } = req.body;
+  Product.findById(productId).exec((err, product) => {
+    if (err) return res.status(400).json({ err });
+    const alreadyReviewed = product.reviews.find(
+      (r) => r.user.toString() === userId.toString()
+    );
+
+    if (alreadyReviewed) {
+      return res.json({
+        success: false,
+        message: "You've already written a review",
+      });
+    }
+
+    let review = {
+      name,
+      rating: Number(rate),
+      comment: text,
+      user: userId,
+    };
+    product.reviews.push(review);
+
+    product.numReviews = product.reviews.length;
+
+    product.rating =
+      product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+      product.reviews.length;
+
+    product.save((err) => {
+      if (err) return res.status(200).json(err);
+      res.status(201).json({ success: true, product });
+    });
+  });
 });
 
 module.exports = Router;
