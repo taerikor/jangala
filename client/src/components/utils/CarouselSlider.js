@@ -35,7 +35,9 @@ function CarouselSlider() {
       .then((res) => setProducts(res.data))
       .catch((err) => alert(err));
   }, []);
+
   if (products) {
+    console.log(products);
     return (
       <>
         <h1>Top Sales</h1>

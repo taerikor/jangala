@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Typography, Button, Card, Col, Row } from "antd";
+import { Typography, Button, Card, Col, Row, Rate } from "antd";
 import Carousel from "../../utils/CarouselSlider";
 import CheckBox from "./Sections/CheckBox";
 import { continents, price } from "./Sections/Datas";
@@ -55,6 +55,7 @@ function LandingPage() {
             }
           >
             <Meta title={product.title} description={`$${product.price}`} />
+            <Rate allowHalf disabled defaultValue={product.rating} />
           </Card>
         </a>
       </Col>
@@ -118,6 +119,7 @@ function LandingPage() {
     setSearchTerm(newSearchTerm);
     getProducts(body);
   };
+  console.log(products);
   return (
     <div style={{ width: "80%", margin: "1rem auto" }}>
       <Carousel />

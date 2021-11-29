@@ -112,8 +112,6 @@ let storage = multer.diskStorage({
 let upload = multer({ storage: storage }).single("file");
 
 Router.post("/uploadImage", (req, res) => {
-  console.log(storage);
-
   upload(req, res, (err) => {
     if (err) {
       return res.json({ success: false, err });
