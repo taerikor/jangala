@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { Form, Input, Button, Rate } from "antd";
 import { useSelector } from "react-redux";
@@ -29,6 +29,7 @@ const ReviewForm = ({ productId, refreshRender }) => {
     axios.post("/api/product/add_review", body).then((res) => {
       if (res.data.success) {
         refreshRender(res.data.product);
+        setText("");
       } else {
         alert(res.data.message);
       }

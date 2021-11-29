@@ -123,9 +123,10 @@ Router.post("/add_review", (req, res) => {
     );
 
     if (alreadyReviewed) {
-      res
-        .status(400)
-        .json({ success: false, message: "You've already written a review" });
+      return res.json({
+        success: false,
+        message: "You've already written a review",
+      });
     }
 
     let review = {
