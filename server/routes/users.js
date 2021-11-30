@@ -60,8 +60,8 @@ Router.get("/auth", auth, (req, res) => {
     name: req.user.name,
     lastname: req.user.lastname,
     role: req.user.role,
-    image: req.user.image,
     cart: req.user.cart,
+    shippingAddress: req.user.shippingAddress,
     history: req.user.history,
   });
 });
@@ -88,51 +88,6 @@ Router.post("/editUserName", (req, res) => {
       return res.status(200).json({
         success: true,
         name,
-      });
-    }
-  );
-});
-
-let storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/userImg/");
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}_${file.originalname}`);
-  },
-  fileFilter: (req, file, cb) => {
-    const ext = path.extname(file.originalname);
-    if (ext !== ".jpg" || ext !== ".png") {
-      return cb(res.status(400).end("only jpg, png is allowed"), false);
-    }
-    cb(null, true);
-  },
-});
-
-let upload = multer({ storage: storage }).single("file");
-
-Router.post("/uploadImage", (req, res) => {
-  upload(req, res, (err) => {
-    if (err) {
-      return res.json({ success: false, err });
-    }
-    return res.json({
-      success: true,
-      filePath: res.req.file.path,
-      fileName: res.req.file.filename,
-    });
-  });
-});
-
-Router.post("/editImage", (req, res) => {
-  User.findOneAndUpdate(
-    { _id: req.body.userId },
-    { image: req.body.image },
-    (err, image) => {
-      if (err) return res.json({ success: false, err });
-      return res.status(200).json({
-        success: true,
-        image,
       });
     }
   );
@@ -279,6 +234,28 @@ Router.get("/history", auth, (req, res) => {
   User.findOne({ _id: req.user._id }, (err, user) => {
     if (err) return res.json({ success: false, err });
     res.status(200).json({ success: true, history: user.history });
+  });
+});
+
+Router.post("/add_shipping_address", auth, (req, res) => {
+  const { title, address, city, postal, country } = req.body;
+  User.findOne({ _id: req.user._id }, (err, userInfo) => {
+    if (err) return res.status(400).json({ err });
+
+    let location = {
+      title,
+      address,
+      city,
+      postal,
+      country,
+    };
+
+    userInfo.shippingAddress.push(location);
+
+    userInfo.save((err) => {
+      if (err) return res.status(200).json(err);
+      res.status(201).send(userInfo.shippingAddress);
+    });
   });
 });
 
