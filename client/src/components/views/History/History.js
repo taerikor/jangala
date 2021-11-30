@@ -1,7 +1,7 @@
 import { Typography } from "antd";
 import React from "react";
 const { Title } = Typography;
-function History({ user }) {
+function History({ userData }) {
   return (
     <div style={{}}>
       <div style={{}}>
@@ -20,9 +20,8 @@ function History({ user }) {
         </thead>
 
         <tbody>
-          {user.userData &&
-            user.userData.history &&
-            user.userData.history.map((item) => (
+          {userData.history &&
+            userData.history.map((item) => (
               <tr key={item.id}>
                 <td>{item.id}</td>
                 <td>{item.price}</td>

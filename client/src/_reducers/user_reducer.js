@@ -1,4 +1,5 @@
 import {
+  ADD_SHIPPING_ADDRESS,
   ADD_TO_CART,
   AUTH_USER,
   GET_CART_ITEMS,
@@ -48,6 +49,14 @@ function userReducer(state = initialState, action) {
         userData: {
           ...state.userData,
           cart: action.payload.cart,
+        },
+      };
+    case ADD_SHIPPING_ADDRESS:
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          shippingAddress: action.payload,
         },
       };
     default:

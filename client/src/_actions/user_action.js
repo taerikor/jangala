@@ -8,6 +8,7 @@ import {
   REMOVE_FROM_CART,
   ON_SUCCESS_BUY,
   ADD_REVIEW,
+  ADD_SHIPPING_ADDRESS,
 } from "./types";
 
 export function loginUser(dataToSubmit) {
@@ -91,6 +92,16 @@ export function onSuccessBuy(data) {
     .then((res) => res.data);
   return {
     type: ON_SUCCESS_BUY,
+    payload: request,
+  };
+}
+
+export function addAddressAction(body) {
+  const request = axios
+    .post("/api/users/add_shipping_address", body)
+    .then((res) => res.data);
+  return {
+    type: ADD_SHIPPING_ADDRESS,
     payload: request,
   };
 }
