@@ -7,34 +7,34 @@ import { withRouter } from "react-router-dom";
 const { TextArea } = Input;
 const { Title } = Typography;
 
-const ContinentOptions = [
+const CategoryOptions = [
   {
     value: 1,
-    label: "Africa",
+    label: "Electronics",
   },
   {
     value: 2,
-    label: "Europe",
+    label: "Fashion",
   },
   {
     value: 3,
-    label: "Asia",
+    label: "Health",
   },
   {
     value: 4,
-    label: "North America",
+    label: "Sports",
   },
   {
     value: 5,
-    label: "South America",
+    label: "Pet supplies",
   },
   {
     value: 6,
-    label: "Australia",
+    label: "Beauty",
   },
   {
     value: 7,
-    label: "Antarctica",
+    label: "Baby",
   },
 ];
 
@@ -42,7 +42,7 @@ function UploadPage({ history }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
-  const [continent, setContinent] = useState(0);
+  const [category, setCategory] = useState(0);
   const [images, setImages] = useState([]);
 
   const onTitleChange = (e) => {
@@ -69,11 +69,11 @@ function UploadPage({ history }) {
     const {
       target: { value },
     } = e;
-    setContinent(value);
+    setCategory(value);
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    if (!title || !description || !price || !images || !continent) {
+    if (!title || !description || !price || !images || !category) {
       return message.warning("type blank");
     }
 
@@ -83,7 +83,7 @@ function UploadPage({ history }) {
       price,
       images,
       writer: localStorage.getItem("userId"),
-      continents: continent,
+      category,
     };
 
     axios.post("/api/product", ProductVariable).then((res) => {
@@ -101,7 +101,7 @@ function UploadPage({ history }) {
   return (
     <div style={{ maxWidth: "700px", margin: "2rem auto" }}>
       <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-        <Title level={2}> Travel Product Upload </Title>
+        <Title level={2}> Product Upload </Title>
       </div>
       <FileUpload uploadImages={uploadImages} />
       <Form onSubmit={onSubmit}>
@@ -119,8 +119,8 @@ function UploadPage({ history }) {
         <Input type="number" value={price} onChange={onPriceChange} />
         <br />
         <br />
-        <select onChange={onCotinentChange} value={continent}>
-          {ContinentOptions.map((option, index) => (
+        <select onChange={onCotinentChange} value={category}>
+          {CategoryOptions.map((option, index) => (
             <option key={index} value={option.value}>
               {option.label}
             </option>

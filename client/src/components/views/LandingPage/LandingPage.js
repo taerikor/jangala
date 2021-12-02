@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Typography, Button, Card, Col, Row, Rate } from "antd";
 import Carousel from "../../utils/CarouselSlider";
 import CheckBox from "./Sections/CheckBox";
-import { continents, price } from "./Sections/Datas";
+import { category, price } from "./Sections/Datas";
 import RadioBox from "./Sections/RadioBox";
 import SearchFeature from "./Sections/SearchFeature";
 
@@ -15,7 +15,7 @@ function LandingPage() {
   const [Skip, setSkip] = useState(0);
   const [Limit, setLimit] = useState(8);
   const [postSize, setPostSize] = useState(0);
-  const [Filters, setFilters] = useState({ continents: [], price: [] });
+  const [Filters, setFilters] = useState({ category: [], price: [] });
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
@@ -127,8 +127,8 @@ function LandingPage() {
         <Col lg={12} xs={24}>
           {/* CheckBox */}
           <CheckBox
-            list={continents}
-            handleFilters={(filters) => handleFilters(filters, "continents")}
+            list={category}
+            handleFilters={(filters) => handleFilters(filters, "category")}
           />
         </Col>
         <Col lg={12} xs={24}>

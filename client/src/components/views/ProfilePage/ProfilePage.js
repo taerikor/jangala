@@ -88,6 +88,14 @@ function ProfilePage({ history }) {
                 Edit
               </span>
             </div>
+            {isNameEdit && (
+              <Form onSubmit={onNameSubmit} style={{ display: "flex" }}>
+                <Input name="name" onChange={onNameChange} value={newName} />
+                <Button type="primary" size="large" onClick={onNameSubmit}>
+                  Submit
+                </Button>
+              </Form>
+            )}
             <label>Shipping Address</label>
             <hr />
             <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -113,14 +121,6 @@ function ProfilePage({ history }) {
                 Add
               </span>
             </div>
-            {isNameEdit && (
-              <Form onSubmit={onNameSubmit} style={{ display: "flex" }}>
-                <Input name="name" onChange={onNameChange} value={newName} />
-                <Button type="primary" size="large" onClick={onNameSubmit}>
-                  Submit
-                </Button>
-              </Form>
-            )}
           </div>
           {isAddAddress && <ShippingForm onToggle={onToggleAddAddress} />}
           {selected && (
