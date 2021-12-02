@@ -4,20 +4,13 @@ import { useSelector } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Layout, Menu, Dropdown } from "antd";
+import ChatbotButton from "./Sections/ChatbotButton";
 
 const { Header } = Layout;
 
 function NavBar({ history }) {
-  const [isAuth, setIsAuth] = useState(false);
   const user = useSelector((state) => state.user);
-
-  useEffect(() => {
-    if (user.userData?.isAuth) {
-      setIsAuth(true);
-    } else {
-      setIsAuth(false);
-    }
-  }, [user]);
+  const { isAuth } = useSelector((state) => state.user.userData);
 
   const onClick = () => {
     axios.get("/api/users/logout").then((res) => {
@@ -60,12 +53,13 @@ function NavBar({ history }) {
               </Menu.Item>
               <Menu.Item style={{ float: "right" }} key="cart">
                 <Link to="/user/cart">
-                  {`CART (${user.userData.cart.length})`}
+                  {`CART (${user.userData.cart?.length})`}
                 </Link>
               </Menu.Item>
               <Menu.Item style={{ float: "right" }} key="upload">
                 <Link to="/product/upload">SELL</Link>
               </Menu.Item>
+              <ChatbotButton />
             </>
           ) : (
             <>
