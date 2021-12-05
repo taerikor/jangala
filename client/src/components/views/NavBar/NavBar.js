@@ -1,14 +1,16 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Layout, Menu, Dropdown } from "antd";
 import ChatbotButton from "./Sections/ChatbotButton";
+import Chatbot from "../Ctatbot/Chatbot";
 
 const { Header } = Layout;
 
 function NavBar({ history }) {
+  const [openChatbot, setOpenChatbot] = useState(false);
   const user = useSelector((state) => state.user);
   const { isAuth } = useSelector((state) => state.user.userData);
 
@@ -20,6 +22,10 @@ function NavBar({ history }) {
         alert("failed logout");
       }
     });
+  };
+
+  const toggleChatbot = () => {
+    setOpenChatbot((prev) => !prev);
   };
 
   const menu = (
@@ -59,7 +65,8 @@ function NavBar({ history }) {
               <Menu.Item style={{ float: "right" }} key="upload">
                 <Link to="/product/upload">SELL</Link>
               </Menu.Item>
-              <ChatbotButton />
+              {openChatbot && <Chatbot onClickOutside={toggleChatbot} />}
+              <ChatbotButton actions={toggleChatbot} />
             </>
           ) : (
             <>

@@ -11,3 +11,6 @@ export const ADD_SHIPPING_ADDRESS = "add_shipping_address";
 //------- product
 export const ADD_REVIEW = "add_review";
 export const GET_PRODUCT_DETAIL = "get_product-detail";
+
+//------- chat bot
+export const SAVE_MESSAGE = "save_message";

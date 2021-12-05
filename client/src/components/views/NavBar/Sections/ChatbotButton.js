@@ -16,9 +16,9 @@ const Button = styled.button`
   margin: 15px;
   cursor: pointer;
 `;
-const ChatbotButton = () => {
+const ChatbotButton = ({ actions }) => {
   return (
-    <Button>
+    <Button onClick={() => actions()}>
       <WechatOutlined style={{ fontSize: "30px", color: "white" }} />
     </Button>
   );
