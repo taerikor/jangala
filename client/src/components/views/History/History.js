@@ -21,14 +21,17 @@ function History({ userData }) {
 
         <tbody>
           {userData.history &&
-            userData.history.map((item) => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.price}</td>
-                <td>{item.quantity}</td>
-                <td>{item.dateOfPurchase}</td>
-              </tr>
-            ))}
+            userData.history.map((item) => {
+              const date = new Date(item.dateOfPurchase);
+              return (
+                <tr key={item.id}>
+                  <td>{item.id}</td>
+                  <td>{item.price}</td>
+                  <td>{item.quantity}</td>
+                  <td>{date.toLocaleDateString()}</td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </div>
