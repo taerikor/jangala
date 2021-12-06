@@ -164,16 +164,18 @@ Router.get("/removeFromCart", auth, (req, res) => {
 
 Router.post("/onSuccessBuy", auth, (req, res) => {
   let history = [];
-  let transactionData = {};
+  let transactionData = {
+    dateOfPurchase: Date.now(),
+    id: req.body.paymentData.orderID,
+    price: req.body.price,
+  };
 
   req.body.cartDetail.forEach((item) => {
     history.push({
-      dateOfPurchase: Date.now(),
       name: item.title,
       id: item._id,
       price: item.price,
       quantity: item.quantity,
-      paymentId: req.body.paymentData.paymentID,
     });
   });
 
@@ -181,6 +183,7 @@ Router.post("/onSuccessBuy", auth, (req, res) => {
     id: req.user._id,
     name: req.user.name,
     email: req.user.email,
+    address: req.body.address,
   };
 
   transactionData.data = req.body.paymentData;
@@ -188,7 +191,7 @@ Router.post("/onSuccessBuy", auth, (req, res) => {
 
   User.findByIdAndUpdate(
     { _id: req.user._id },
-    { $push: { history: history }, $set: { cart: [] } },
+    { $push: { history: transactionData }, $set: { cart: [] } },
     { new: true },
     (err, user) => {
       if (err) return res.json({ success: false, err });

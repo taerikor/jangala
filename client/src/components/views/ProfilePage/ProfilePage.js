@@ -25,8 +25,8 @@ function ProfilePage({ history }) {
 
   const [isNameEdit, setIsNameEdit] = useState(false);
   const [isAddAddress, setIsAddAddress] = useState(false);
-  const [newName, setNewName] = useState("");
   const [selected, setSelected] = useState(null);
+  const [newName, setNewName] = useState("");
 
   const onNameChange = (e) => {
     const {

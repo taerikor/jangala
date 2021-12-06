@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getCartItems,
-  removeToCart,
-  onSuccessBuy,
-} from "../../../_actions/user_action";
+import { getCartItems, removeToCart } from "../../../_actions/user_action";
 import UserCardBlock from "./Sections/UserCardBlock";
-import { Typography, Empty, Result } from "antd";
-import Paypal from "../../utils/Paypal";
+import { Typography, Empty, Button } from "antd";
+import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 
 function CartPage() {
   const [totalPrice, setTotalPrice] = useState(0);
+  const [totalQuantity, setTotalQuantity] = useState(0);
   const [isEmpty, setIsEmpty] = useState(true);
-  const [isSuccess, setIsSuccess] = useState(false);
 
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -30,20 +26,23 @@ function CartPage() {
         });
 
         dispatch(getCartItems(cartItems, user.userData.cart)).then((res) => {
-          operationPrice(res.payload);
+          operationValue(res.payload);
         });
       }
     }
   }, [user.userData]);
 
-  const operationPrice = (cartInfo) => {
+  const operationValue = (cartInfo) => {
     if (cartInfo) {
       let total = 0;
+      let quantity = 0;
       cartInfo.forEach((item) => {
         let value = item.quantity * item.price;
         total += value;
+        quantity += item.quantity;
       });
       setTotalPrice(total);
+      setTotalQuantity(quantity);
     }
   };
 
@@ -55,29 +54,11 @@ function CartPage() {
     });
   };
 
-  const transactionSuccess = (data) => {
-    dispatch(
-      onSuccessBuy({
-        paymentData: data,
-        cartDetail: user.cartDetail,
-      })
-    ).then((res) => {
-      if (res.payload.success) {
-        setIsEmpty(true);
-        setIsSuccess(true);
-      }
-    });
-  };
-
   return (
     <div style={{ width: "85%", margin: "3rem auto" }}>
       <Title level={2}>My Cart</Title>
       {isEmpty ? (
-        isSuccess ? (
-          <Result status="success" title="Successfully Purchased Items" />
-        ) : (
-          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
-        )
+        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
       ) : (
         <>
           <div>
@@ -88,9 +69,12 @@ function CartPage() {
           </div>
           <br />
           <div>
+            <h2>{`SUBTOTAL (${totalQuantity}) ITEMS`}</h2>
             <h2>{`Total Amount : $${totalPrice}`}</h2>
           </div>
-          <Paypal amount={totalPrice} onSuccessBuy={transactionSuccess} />
+          <Link to="/user/checkout">
+            <Button type="primary">Proceed to checkout</Button>
+          </Link>
         </>
       )}
     </div>

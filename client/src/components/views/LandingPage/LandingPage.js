@@ -121,7 +121,7 @@ function LandingPage() {
   };
   console.log(products);
   return (
-    <div style={{ width: "80%", margin: "1rem auto" }}>
+    <div style={{}}>
       <Carousel />
       <Row gutter={[16, 16]}>
         <Col lg={12} xs={24}>

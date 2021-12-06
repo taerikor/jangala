@@ -87,6 +87,7 @@ export function removeToCart(productId) {
   };
 }
 export function onSuccessBuy(data) {
+  console.log(data);
   const request = axios
     .post("/api/users/onSuccessBuy", data)
     .then((res) => res.data);

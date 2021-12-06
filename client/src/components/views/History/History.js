@@ -12,26 +12,25 @@ function History({ userData }) {
       <table>
         <thead>
           <tr>
-            <th>Payment Id</th>
+            <th>Order Id</th>
             <th>Price</th>
-            <th>Quantity</th>
-            <th>Date of Purchase</th>
+            <th>Shipping Address</th>
+            <th>Date</th>
           </tr>
         </thead>
 
         <tbody>
-          {userData.history &&
-            userData.history.map((item) => {
-              const date = new Date(item.dateOfPurchase);
-              return (
-                <tr key={item.id}>
-                  <td>{item.id}</td>
-                  <td>{item.price}</td>
-                  <td>{item.quantity}</td>
-                  <td>{date.toLocaleDateString()}</td>
-                </tr>
-              );
-            })}
+          {userData.history?.map((item) => {
+            const date = new Date(item.dateOfPurchase);
+            return (
+              <tr key={item.id}>
+                <td>{item.id}</td>
+                <td>{`$ ${item.price}`}</td>
+                <td>{item.user.address}</td>
+                <td>{date.toLocaleDateString()}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
