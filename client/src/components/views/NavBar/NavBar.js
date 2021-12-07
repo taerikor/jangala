@@ -1,13 +1,13 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { withRouter } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { Layout, Menu, Dropdown } from "antd";
-import ChatbotButton from "./Sections/ChatbotButton";
+import { NavLink, withRouter } from "react-router-dom";
+import { Layout, Menu } from "antd";
+import ActionButtons from "./Sections/ActionButtons";
 import Chatbot from "../Ctatbot/Chatbot";
 
 const { Header } = Layout;
+const { SubMenu } = Menu;
 
 function NavBar({ history }) {
   const [openChatbot, setOpenChatbot] = useState(false);
@@ -28,59 +28,46 @@ function NavBar({ history }) {
     setOpenChatbot((prev) => !prev);
   };
 
-  const menu = (
-    <Menu>
-      <Menu.Item key="0">
-        <a href="/profile">Profile</a>
-      </Menu.Item>
-      <Menu.Item key="1" onClick={onClick}>
-        <span>Logout</span>
-      </Menu.Item>
-    </Menu>
-  );
   return (
-    <Layout>
-      <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
-          <Menu.Item style={{ float: "left" }} key="logo">
-            <Link to="/">Jangala</Link>
-          </Menu.Item>
-          {isAuth ? (
-            <>
-              <Menu.Item style={{ float: "right" }} key="profile">
-                <Dropdown overlay={menu} trigger={["click"]}>
-                  <div
-                    className="ant-dropdown-link"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    <span>{user.userData.name}</span>
-                  </div>
-                </Dropdown>
+    <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
+      <Menu theme="dark" mode="horizontal">
+        <Menu.Item style={{ float: "left" }} key="logo">
+          <NavLink to="/">Jangala</NavLink>
+        </Menu.Item>
+        {isAuth ? (
+          <>
+            <SubMenu
+              style={{ float: "right" }}
+              key="profile"
+              title={user.userData.name}
+            >
+              <Menu.Item key="1">
+                <NavLink to="/profile">Profile</NavLink>
               </Menu.Item>
-              <Menu.Item style={{ float: "right" }} key="cart">
-                <Link to="/user/cart">
-                  {`CART (${user.userData.cart?.length})`}
-                </Link>
+              <Menu.Item key="2" onClick={onClick}>
+                <span>Logout</span>
               </Menu.Item>
-              <Menu.Item style={{ float: "right" }} key="upload">
-                <Link to="/product/upload">SELL</Link>
-              </Menu.Item>
-              {openChatbot && <Chatbot onClickOutside={toggleChatbot} />}
-              <ChatbotButton actions={toggleChatbot} />
-            </>
-          ) : (
-            <>
-              <Menu.Item key="signIn" style={{ float: "right" }}>
-                <Link to="/login">SIGN IN</Link>
-              </Menu.Item>
-              <Menu.Item key="sighUp" style={{ float: "right" }}>
-                <Link to="/register">SIGN UP</Link>
-              </Menu.Item>
-            </>
-          )}
-        </Menu>
-      </Header>
-    </Layout>
+            </SubMenu>
+            <Menu.Item style={{ float: "right" }} key="cart">
+              <NavLink to="/user/cart">
+                {`CART (${user.userData.cart?.length})`}
+              </NavLink>
+            </Menu.Item>
+          </>
+        ) : (
+          <>
+            <Menu.Item key="signIn" style={{ float: "right" }}>
+              <NavLink to="/login">SIGN IN</NavLink>
+            </Menu.Item>
+            <Menu.Item key="sighUp" style={{ float: "right" }}>
+              <NavLink to="/register">SIGN UP</NavLink>
+            </Menu.Item>
+          </>
+        )}
+      </Menu>
+      {isAuth && openChatbot && <Chatbot onClickOutside={toggleChatbot} />}
+      {isAuth && <ActionButtons actions={toggleChatbot} />}
+    </Header>
   );
 }
 

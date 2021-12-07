@@ -9,7 +9,7 @@ import { saveMessage } from "../../../_actions/chatbot";
 import styled from "styled-components";
 
 const ChatbotWrapper = styled.div`
-  z-index: 100;
+  z-index: 2000;
   position: fixed;
   top: 0;
   left: 0;

@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ShippingForm from "../../utils/ShippingForm";
-import { Select, Descriptions, Result } from "antd";
+import { Select, Result, Button, Col, Row } from "antd";
 import Paypal from "../../utils/Paypal";
 import { onSuccessBuy } from "../../../_actions/user_action";
 import UserCardBlock from "../CartPage/Sections/UserCardBlock";
 import { useHistory } from "react-router";
+import styled from "styled-components";
 
 const { Option } = Select;
+
+const BorderBox = styled.div`
+  border: 1px solid #666;
+  padding: 20px;
+  width: 100%;
+`;
 
 const CheckoutPage = () => {
   const dispatch = useDispatch();
@@ -24,7 +31,7 @@ const CheckoutPage = () => {
 
   useEffect(() => {
     operationValue(user.cartDetail);
-  }, []);
+  }, [user.cartDetail]);
 
   useEffect(() => {
     if (!user.cartDetail) {
@@ -78,58 +85,68 @@ const CheckoutPage = () => {
     });
   };
   return (
-    <>
+    <div>
       {isSuccess ? (
         <Result status="success" title="Successfully Purchased Items" />
       ) : (
-        <>
-          <label>Shipping Address</label>
-          <hr />
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            {user.userData.shippingAddress === [] ? (
-              <p>No Address</p>
-            ) : (
-              <Select
-                placeholder={"Select Address"}
-                style={{ width: "120px" }}
-                onChange={handleChange}
+        <Row gutter={(24, 24)}>
+          <Col xl={16} sm={24} xs={24}>
+            <label>Shipping</label>
+            <hr />
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              {user.userData.shippingAddress === [] ? (
+                <p>No Address</p>
+              ) : (
+                <Select
+                  placeholder={"Select Address"}
+                  style={{ width: "120px" }}
+                  onChange={handleChange}
+                >
+                  {user.userData.shippingAddress?.map((item) => (
+                    <Option key={item._id} value={item._id}>
+                      {item.title}
+                    </Option>
+                  ))}
+                </Select>
+              )}
+              <Button
+                onClick={onToggleAddAddress}
+                type="default"
+                // style={{
+                //   float: "right",
+                //   color: "skyblue",
+                //   cursor: "pointer",
+                // }}
               >
-                {user.userData.shippingAddress?.map((item) => (
-                  <Option key={item._id} value={item._id}>
-                    {item.title}
-                  </Option>
-                ))}
-              </Select>
-            )}
-            <span
-              onClick={onToggleAddAddress}
-              style={{
-                float: "right",
-                color: "skyblue",
-                cursor: "pointer",
-              }}
-            >
-              Add
-            </span>
-          </div>
-          {isAddAddress && <ShippingForm onToggle={onToggleAddAddress} />}
-          {selected && (
-            <div>
-              <h2>{`Title: ${selected}`}</h2>
-              <h3>{`Shipping Address: ${shippingAddress}`}</h3>
+                Add
+              </Button>
             </div>
-          )}
-          <div>
-            <UserCardBlock products={user.cartDetail} removeFromCart={false} />
-          </div>
-          <div>
-            <h2>{`SUBTOTAL (${totalQuantity}) ITEMS`}</h2>
-            <h2>{`Total Amount : $${totalPrice}`}</h2>
-            <Paypal amount={totalPrice} onSuccessBuy={transactionSuccess} />
-          </div>
-        </>
+            {isAddAddress && <ShippingForm onToggle={onToggleAddAddress} />}
+            {selected && (
+              <div>
+                <h2>{`Title: ${selected}`}</h2>
+                <h3>{`Address: ${shippingAddress}`}</h3>
+              </div>
+            )}
+            <div style={{ margin: "40px 20px" }}>
+              <UserCardBlock
+                products={user.cartDetail}
+                removeFromCart={false}
+              />
+            </div>
+          </Col>
+          <Col xl={8} sm={24} xs={24}>
+            <BorderBox style={{ border: "1px soild #666" }}>
+              <h2>{`SUBTOTAL (${totalQuantity}) ITEMS`}</h2>
+              <h2>{`Total Amount : $${totalPrice}`}</h2>
+              {shippingAddress && (
+                <Paypal amount={totalPrice} onSuccessBuy={transactionSuccess} />
+              )}
+            </BorderBox>
+          </Col>
+        </Row>
       )}
-    </>
+    </div>
   );
 };
 

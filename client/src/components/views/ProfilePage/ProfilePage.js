@@ -70,9 +70,9 @@ function ProfilePage({ history }) {
   return (
     <Row gutter={[16, 16]}>
       <Col xs={24} md={8}>
-        <Title>USER PROFILE</Title>
+        <Title>PROFILE</Title>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ marginTop: "3rem" }}>
+          <div style={{ marginTop: "2rem" }}>
             <label>Name</label>
             <hr />
             <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -124,7 +124,7 @@ function ProfilePage({ history }) {
           </div>
           {isAddAddress && <ShippingForm onToggle={onToggleAddAddress} />}
           {selected && (
-            <Descriptions title={selected.title}>
+            <Descriptions style={{ marginTop: "10px" }}>
               <Descriptions.Item label="Address">
                 {selected.address}
               </Descriptions.Item>

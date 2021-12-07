@@ -6,6 +6,7 @@ import CheckBox from "./Sections/CheckBox";
 import { category, price } from "./Sections/Datas";
 import RadioBox from "./Sections/RadioBox";
 import SearchFeature from "./Sections/SearchFeature";
+import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 const { Meta } = Card;
@@ -17,6 +18,7 @@ function LandingPage() {
   const [postSize, setPostSize] = useState(0);
   const [Filters, setFilters] = useState({ category: [], price: [] });
   const [searchTerm, setSearchTerm] = useState("");
+  const [isLoadDone, setIsLoadDone] = useState(false);
 
   useEffect(() => {
     let productsBody = {
@@ -35,6 +37,7 @@ function LandingPage() {
           setProducts(res.data.products);
         }
         setPostSize(res.data.products.length);
+        setIsLoadDone(true);
       } else {
         alert("failed to get products");
       }
@@ -43,13 +46,13 @@ function LandingPage() {
 
   const renderCards = products.map((product, index) => {
     return (
-      <Col lg={6} md={8} xs={24} key={index}>
-        <a href={`/product/${product._id}`}>
+      <Col xl={6} lg={8} md={8} sm={12} xs={24} key={product._id}>
+        <Link to={`/product/${product._id}`}>
           <Card
             cover={
               <img
                 src={`http://localhost:5000/${product.images[0]}`}
-                style={{ width: "100%", height: "250px" }}
+                style={{ width: "100%", height: "300px" }}
                 alt="product"
               />
             }
@@ -57,7 +60,7 @@ function LandingPage() {
             <Meta title={product.title} description={`$${product.price}`} />
             <Rate allowHalf disabled defaultValue={product.rating} />
           </Card>
-        </a>
+        </Link>
       </Col>
     );
   });
@@ -119,44 +122,53 @@ function LandingPage() {
     setSearchTerm(newSearchTerm);
     getProducts(body);
   };
-  console.log(products);
   return (
-    <div style={{}}>
-      <Carousel />
-      <Row gutter={[16, 16]}>
-        <Col lg={12} xs={24}>
-          {/* CheckBox */}
-          <CheckBox
-            list={category}
-            handleFilters={(filters) => handleFilters(filters, "category")}
-          />
-        </Col>
-        <Col lg={12} xs={24}>
-          {/* RadioBox */}
-          <RadioBox
-            list={price}
-            handleFilters={(filters) => handleFilters(filters, "price")}
-          />
-        </Col>
-      </Row>
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <div style={{ maxWidth: "1200px" }}>
+        {isLoadDone ? (
+          <>
+            <Carousel />
+            <Row gutter={[16, 16]}>
+              <Col lg={12} xs={24}>
+                {/* CheckBox */}
+                <CheckBox
+                  list={category}
+                  handleFilters={(filters) =>
+                    handleFilters(filters, "category")
+                  }
+                />
+              </Col>
+              <Col lg={12} xs={24}>
+                {/* RadioBox */}
+                <RadioBox
+                  list={price}
+                  handleFilters={(filters) => handleFilters(filters, "price")}
+                />
+              </Col>
+            </Row>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          margin: "1rem auto",
-        }}
-      >
-        <SearchFeature reFreshFunction={updateSearchTerm} />
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                margin: "1rem auto",
+              }}
+            >
+              <SearchFeature reFreshFunction={updateSearchTerm} />
+            </div>
+            <br />
+            <Row gutter={(12, 12)}>{renderCards}</Row>
+            <br />
+            {postSize >= Skip && (
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <Button onClick={onLoadClick}>Load More</Button>
+              </div>
+            )}
+          </>
+        ) : (
+          <Title>Loading... </Title>
+        )}
       </div>
-      <br />
-      <Row gutter={(12, 12)}>{renderCards}</Row>
-      <br />
-      {postSize >= Skip && (
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <Button onClick={onLoadClick}>Load More</Button>
-        </div>
-      )}
     </div>
   );
 }

@@ -3,8 +3,8 @@ import React from "react";
 const { Title } = Typography;
 function History({ userData }) {
   return (
-    <div style={{}}>
-      <div style={{}}>
+    <div>
+      <div style={{ marginBottom: "2rem" }}>
         <Title>MY ORDERS</Title>
       </div>
       <br />

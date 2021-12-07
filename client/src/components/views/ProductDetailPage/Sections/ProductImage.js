@@ -10,7 +10,7 @@ function ProductImage({ detail }) {
     if (detail.images && detail.images.length > 0) {
       let images = [];
 
-      detail.images.map((item) => {
+      detail.images.forEach((item) => {
         images.push({
           original: `http://localhost:5000/${item}`,
           thumbnail: `http://localhost:5000/${item}`,
