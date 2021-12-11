@@ -1,11 +1,9 @@
 import { combineReducers } from "redux";
-import user from "./user_reducer";
-import product from "./product";
+import user from "./user";
 import chatbot from "./chatbot";
 
 const rootReducer = combineReducers({
   user,
-  product,
   chatbot,
 });
 
