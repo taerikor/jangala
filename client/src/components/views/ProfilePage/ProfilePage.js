@@ -124,7 +124,7 @@ function ProfilePage({ history }) {
           </div>
           {isAddAddress && <ShippingForm onToggle={onToggleAddAddress} />}
           {selected && (
-            <Descriptions style={{ marginTop: "10px" }}>
+            <Descriptions column={1} style={{ marginTop: "10px" }}>
               <Descriptions.Item label="Address">
                 {selected.address}
               </Descriptions.Item>
