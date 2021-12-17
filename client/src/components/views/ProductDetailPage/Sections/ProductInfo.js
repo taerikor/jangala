@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Descriptions, Rate, Typography } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../../../_actions/user_action";
+import { addToCart } from "../../../../_actions/user";
 
 const { Title } = Typography;
 

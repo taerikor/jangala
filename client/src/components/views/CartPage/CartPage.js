@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCartItems, removeToCart } from "../../../_actions/user_action";
+import { getCartItems, removeToCart } from "../../../_actions/user";
 import UserCardBlock from "./Sections/UserCardBlock";
 import { Typography, Empty, Button } from "antd";
 import { Link } from "react-router-dom";

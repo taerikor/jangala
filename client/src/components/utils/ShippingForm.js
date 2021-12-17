@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Input, Button } from "antd";
 import { useDispatch } from "react-redux";
-import { addAddressAction } from "../../_actions/user_action";
+import { addAddressAction } from "../../_actions/user";
 
 const ShippingForm = ({ onToggle }) => {
   const dispatch = useDispatch();

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ShippingForm from "../../utils/ShippingForm";
 import { Select, Result, Button, Col, Row } from "antd";
 import Paypal from "../../utils/Paypal";
-import { onSuccessBuy } from "../../../_actions/user_action";
+import { onSuccessBuy } from "../../../_actions/user";
 import UserCardBlock from "../CartPage/Sections/UserCardBlock";
 import { useHistory } from "react-router";
 import styled from "styled-components";

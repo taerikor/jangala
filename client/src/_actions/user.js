@@ -7,7 +7,6 @@ import {
   REGISTER_USER,
   REMOVE_FROM_CART,
   ON_SUCCESS_BUY,
-  ADD_REVIEW,
   ADD_SHIPPING_ADDRESS,
 } from "./types";
 
