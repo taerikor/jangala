@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 import promiseMiddleware from "redux-promise";
 import reduxThunk from "redux-thunk";
 
-import "./index.css";
+import "./utils/image-gallery.css";
 
 const createStoreWithMiddleware = applyMiddleware(
   promiseMiddleware,

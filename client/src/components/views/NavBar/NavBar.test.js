@@ -1,7 +1,7 @@
 import React from "react";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
-import { render, fireEvent, screen } from "../../../test-utils";
+import { render, fireEvent, screen } from "../../../utils/test-utils";
 
 import NavBar from "./NavBar";
 
