@@ -1,6 +1,7 @@
 # Jangala
 
 eCommerce platform with React,Redux,Express,MongoDB
+![main](client/src/images/main.png)
 
 ## Feature
 

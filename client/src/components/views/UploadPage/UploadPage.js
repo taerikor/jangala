@@ -42,7 +42,7 @@ function UploadPage({ history }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
-  const [category, setCategory] = useState(0);
+  const [category, setCategory] = useState(1);
   const [images, setImages] = useState([]);
 
   const onTitleChange = (e) => {
@@ -119,7 +119,7 @@ function UploadPage({ history }) {
         <Input type="number" value={price} onChange={onPriceChange} />
         <br />
         <br />
-        <select onChange={onCotinentChange} value={category}>
+        <select defaultValue={1} onChange={onCotinentChange} value={category}>
           {CategoryOptions.map((option, index) => (
             <option key={index} value={option.value}>
               {option.label}

@@ -10,7 +10,7 @@
     "@testing-library/user-event": "^12.6.0",
     "antd": "^4.10.3",
     "axios": "^0.21.1",
-    "http-proxy-middleware": "^1.0.6",
+    "http-proxy-middleware": "^2.0.4",
     "moment": "^2.29.1",
     "msw": "^0.36.3",
     "react": "^17.0.1",

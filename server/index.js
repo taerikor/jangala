@@ -10,7 +10,6 @@ const mongoose = require("mongoose");
 mongoose
   .connect(config.mongoURI, {
     useNewUrlParser: true,
-    useFindAndModify: false,
     useUnifiedTopology: true,
     useCreateIndex: true,
   })

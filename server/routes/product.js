@@ -38,7 +38,6 @@ Router.post("/getProducts", (req, res) => {
   let limit = req.body.limit ? parseInt(req.body.limit) : 20;
   let skip = req.body.skip ? parseInt(req.body.skip) : 0;
   let term = req.body.searchTerm;
-
   let findArgs = {};
 
   for (let key in req.body.filters) {

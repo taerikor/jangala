@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Typography, Button, Card, Col, Row, Rate } from "antd";
-import Carousel from "../../utils/CarouselSlider";
+import Carousel from "./Sections/CarouselSlider";
 import CheckBox from "./Sections/CheckBox";
 import { category, price } from "./Sections/Datas";
 import RadioBox from "./Sections/RadioBox";

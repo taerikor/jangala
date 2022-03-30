@@ -12,10 +12,9 @@ const Wrapper = styled(Link)`
   background-color: #212121;
   height: 400px;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-
-  & img {
+  * & img {
     max-width: 350px;
     max-height: 350px;
     border-radius: 100%;
@@ -36,10 +35,7 @@ const Wrapper = styled(Link)`
 const ContentWrapper = styled.div`
   color: white;
   text-align: left;
-  margin-left: 40px;
-  @media (max-width: 767px) {
-    margin-left: 0;
-  }
+  max-width: 400px;
 `;
 
 const Desc = styled.p`
